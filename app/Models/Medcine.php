@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Rendez_vous;
+
 
 class Medcine extends Model
 {
@@ -17,7 +17,8 @@ class Medcine extends Model
         'nom','specialite'
     ];
 
-    public function Rendez_vous(){
-        return $this->hasMany(Rendez_vous::class,'matricule','matricule');
+    public function Patients(){
+        return $this->belongsToManyy(Patient::class)
+                    ->with(Rendez_vous::class);
     }
 }
