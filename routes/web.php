@@ -1,10 +1,13 @@
 <?php
 
-use App\Http\Controllers\PatientsController;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\TestController;
+
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
+
+use App\Http\Controllers\PatientsController;
+use App\Http\Controllers\TestController;
+use App\Http\Controllers\GestionController;
 
 Route::get('/home', function () {
     return 'Bonjour Laravel';
@@ -79,3 +82,12 @@ Route::post('/profile', function (Request $request) {
 
     return "Nom: " . $nom . " | Email: " . $email;
 });
+
+
+Route::get('/projets', [GestionController::class, 'Afficher'])->name('index');
+Route::get('/projets/{id}', [GestionController::class, 'show'])->name('show');
+Route::get('/etapes/create', function() {
+    return view('gestion.create');
+})->name('create');
+Route::post('/etapes', [GestionController::class, 'store'])->name('store');
+
