@@ -8,6 +8,16 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\PatientsController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\GestionController;
+use App\Http\Middleware\AgeMiddleware;
+use App\Http\Middleware\CheckAge;
+
+
+Route::view("/verif", "tp1.verif")->name('verif');
+Route::post("/accueil",function(Request $request){
+    $age = $request->input('age');
+    return view("tp1.accueil",compact('age'));
+})->name("accueil")->middleware('age');
+
 
 Route::get('/home', function () {
     return 'Bonjour Laravel';
@@ -15,17 +25,12 @@ Route::get('/home', function () {
 
 Route::resource('/patients',PatientsController::class);
 
-Route::get('/accueil', function () {
-    return view('accueil');
-})->name('accueil');
-
-
 Route::get('/test-index', [TestController::class, 'index']);
 
 Route::get('/test', [TestController::class, 'show']);
 
 
-Route::view('/view', 'accueil');
+
 
 
 Route::get('/home/{nom}', function ($nom) {
@@ -89,5 +94,16 @@ Route::get('/projets/{id}', [GestionController::class, 'show'])->name('show');
 Route::get('/etapes/create', function() {
     return view('gestion.create');
 })->name('create');
+
 Route::post('/etapes', [GestionController::class, 'store'])->name('store');
+
+
+
+
+
+Route::view("home", "home")->name('home');
+Route::post("page_secrete", function() {
+    return view("page_secrete");
+})->name("page_secrete")->middleware(CheckAge::class);
+
 

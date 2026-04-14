@@ -1,0 +1,20 @@
+1/Annonce::find(20);
+2/Annonce::where("ville","Fés")->get();
+3/Annonce::where("titre","Like","%R+2%")->orwhere("description","Like","%R+2%")get();
+4/Annonce::whereIn("type",["villa","maison"])->get();
+
+6/Annonce::where("created_at",Annonce::max("created_at"))->first();
+7/Annonce::where("neuf",1)->whereBetween("superficie",[70,100])->get();
+8/Annonce::where("type","appartement")->orderby("created_at","DESC")->limit(4)->get();
+9/Annonce::select("ville")->distinct()->get();
+10/Annonce::selectRaw("titre,prix * 0.95 as Sold")->where("type","appartement")->get();
+
+11/Annonce::destroy()->whereYear("created_at","<",date("Y")-2)->whereMonth("updated_at","<",date("M")-3);
+12/Annonce::count()->where("ville","Méknes");
+13/Annonce::where("prix",Annonce::max("price"))->first();
+14/Annonce::min("superficie");
+
+15/Annonce::selectRaw("prix,avg(*) as average_price")->groupBy("type")->get();
+16/Annonce::selectRaw("ville,count(*) as nombre_des_annones )->orderBy("ville")->get();
+17/Annonce::selectRaw("ville,count(*) as nombre_des_annones )->groupby("ville")->orderBy("nombre_des_annones","DESC")->limit(1)->get();
+18/Annonce::selectRaw("ville,avg(superficie) as average_per_city")->groupby("ville")->whereBetween("average_per_city",[100,150])->get();

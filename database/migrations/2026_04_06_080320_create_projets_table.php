@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string("titre");
             $table->date("date_debut");
             $table->date("date_fin");
-            $table->date("date_fin");
             $table->float("budget");
             $table->string("location");
             $table->timestamps();

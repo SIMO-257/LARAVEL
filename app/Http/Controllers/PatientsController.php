@@ -31,11 +31,6 @@ class PatientsController extends Controller
         return redirect()->route('patients.index');
     }
 
-    public function show(string $id)
-    {
-        
-    }
-
     public function edit(string $num_dossier)
     {
         $patient = DB::table("patients")->where('num_dossier', $num_dossier)->first();

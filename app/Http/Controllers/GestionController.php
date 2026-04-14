@@ -24,9 +24,7 @@ class GestionController extends Controller
     public function store(Request $request)
     {
         $etape = new Etape();
-        $etape->description = $request->description;
-        $etape->date_realisation = $request->date_realisation;
-        $etape->id_projet = $request->id_projet;
+        $etape->update($request->all());
         $etape->save();
         return redirect()->route('index');
     }

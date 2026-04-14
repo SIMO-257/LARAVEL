@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id("idetapes");
             $table->text("description");
             $table->date("date_realisation");
-            $table->date("date_realisation");
             $table->foreign("id_projet")->references("projets")->on("idP");
             $table->timestamps();
         });
