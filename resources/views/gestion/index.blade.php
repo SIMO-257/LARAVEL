@@ -23,7 +23,7 @@
       <td>{{ $projet->location }}</td>
       <td>
         <a href='{{ route("show", $projet->idP) }}'>Etapes</a>
-        <a href='{{ route("create") }}'>Ajouter</a>
+        <a href='{{ route("create",$projet->idP) }}'>Ajouter</a>
       </td>
     </tr>
     @endforeach

@@ -11,13 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('stagiaires', function (Blueprint $table) {
-            $table->id();
-            $table->string("nom");
-            $table->integer("age");
-            $table->string("email");
-            $table->foreignId("filiere_id");
-            $table->timestamps();
+        Schema::table('stagiaires', function (Blueprint $table) {
+            $table->foreign('filiere_id')->references('id')->on('filieres')->cascadeOnDelete();
         });
     }
 
@@ -26,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('stagiaires');
+        Schema::table('stagiaires', function (Blueprint $table) {
+            $table->dropForeign(['filiere_id']);
+        });
     }
 };

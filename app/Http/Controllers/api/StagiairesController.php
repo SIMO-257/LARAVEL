@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Filiere;
 use App\Models\Stagiaire;
 use Illuminate\Http\Request;
 
@@ -13,6 +14,19 @@ class StagiairesController extends Controller
     {
         $stagiaires = Stagiaire::all() ;
         return $stagiaires;
+    }
+
+    public function afficher($id)
+    {
+        $id == 0 ? Stagiaire::all() : Stagiaire::where("filiere_id",$id)->get();
+        // $stagiaires = Stagiaire::where("filiere_id",$id)->get() ;
+        // return response()->json($stagiaires);
+    }
+
+    public function filieres_list()
+    {
+        $filieres = Filiere::all();
+        return response()->json($filieres);
     }
 
     public function store(Request $req)

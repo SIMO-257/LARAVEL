@@ -16,6 +16,10 @@ class Stagiaire extends Model
     public $timestamps = true;
 
     protected $fillable = [
-        'nom', 'age', 'email',
+        'nom', 'age', 'email', 'filiere_id',
     ];
+
+    public function filiere(){
+        return $this->belongsTo(Filiere::class);
+    }
 }
