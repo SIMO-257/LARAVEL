@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Filiere;
 use App\Models\Stagiaire;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -23,6 +24,8 @@ class StagiaireFactory extends Factory
             'nom' => fake()->name(),
             'age' => fake()->numberBetween(18, 35),
             'email' => fake()->unique()->safeEmail(),
+            'filiere_id' => Filiere::query()->inRandomOrder()->value('id')
+                ?? Filiere::query()->create(['nom_filiere' => fake()->unique()->word()])->id,
         ];
     }
 }

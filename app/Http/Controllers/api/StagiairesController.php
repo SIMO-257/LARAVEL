@@ -19,7 +19,7 @@ class StagiairesController extends Controller
     public function afficher($id)
     {
         $id == 0 ? Stagiaire::all() : Stagiaire::where("filiere_id",$id)->get();
-        // $stagiaires = Stagiaire::where("filiere_id",$id)->get() ;
+        // $stagiaires = Stagiaire::where("filierephp artisan serve_id",$id)->get() ;
         // return response()->json($stagiaires);
     }
 

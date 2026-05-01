@@ -1,6 +1,6 @@
 <?php
 
-
+use App\Http\Controllers\EntreesEauxController;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\PatientsController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\GestionController;
+use App\Http\Controllers\RomanController;
 use App\Http\Middleware\AgeMiddleware;
 use App\Http\Middleware\CheckAge;
 
@@ -17,6 +18,20 @@ Route::post("/accueil",function(Request $request){
     $age = $request->input('age');
     return view("tp1.accueil",compact('age'));
 })->name("accueil")->middleware('age');
+
+
+
+////Controle 1://////
+Route::resource("/romans",RomanController::class);
+/////////////////////
+
+
+////Controle 2://////
+Route::post("/entres",[EntreesEauxController::class,"store"])->name("ajouter");
+Route::get("/entrees/{riviere}",[EntreesEauxController::class, 'ListBarrageByRiviere'])->name("afficher-barrage");
+Route::get("/barrages/{nomBarrage}",[EntreesEauxController::class,"calculGTotal"])->name("calculer-total");
+Route::post("/entrees",[EntreesEauxController::class," getEntreesEaux"])->name("index");
+/////////////////////
 
 
 Route::get('/home', function () {

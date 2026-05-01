@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id("idetapes");
             $table->text("description");
             $table->date("date_realisation");
-            $table->foreign("id_projet")->references("projets")->on("idP");
+            $table->unsignedBigInteger("id_projet");
+            $table->foreign("id_projet")->references("idP")->on("projets")->cascadeOnDelete();
             $table->timestamps();
         });
     }
