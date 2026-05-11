@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ConnexionController;
 use App\Http\Controllers\EntreesEauxController;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Route;
@@ -11,6 +12,28 @@ use App\Http\Controllers\GestionController;
 use App\Http\Controllers\RomanController;
 use App\Http\Middleware\AgeMiddleware;
 use App\Http\Middleware\CheckAge;
+use App\Http\Controllers\InscriptionController;
+use App\Http\Controllers\DeconnexionController;
+
+
+
+
+Route::middleware("guest")->group(function(){
+    //Les routes d'inscription
+    Route::get("/register", [InscriptionController::class, "show"])->name("register-form");
+    Route::get("/login", [ConnexionController::class, "show"])->name("login-form");
+    Route::post("/register", [InscriptionController::class, "register"])
+    ->name("register");
+});
+
+Route::middleware("auth")->group(function(){
+    Route::post("/logout", [DeconnexionController::class, "logout"])->name("logout");
+    Route::resource("/patients",PatientsController::class);
+});
+
+
+
+
 
 
 Route::view("/verif", "tp1.verif")->name('verif');
